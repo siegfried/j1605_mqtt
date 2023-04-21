@@ -15,8 +15,8 @@ defmodule J1605Mqtt.Getter do
 
   def handle_info({:states, relay_states}, client_id) do
     for relay <- 0..15 do
-      topic = "j1605/states/get/#{relay}"
       message = elem(relay_states, relay) |> encode()
+      topic = "j1605/states/get/#{relay + 1}"
       Tortoise.publish(client_id, topic, message)
     end
 
