@@ -9,7 +9,14 @@ defmodule J1605Mqtt.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: J1605Mqtt.Worker.start_link(arg)
-      # {J1605Mqtt.Worker, arg}
+      {J1605Mqtt.Getter, __MODULE__},
+      {Tortoise.Connection,
+       [
+         client_id: __MODULE__,
+         server: {Tortoise.Transport.Tcp, host: Application.get_env(:j1605_mqtt, :host), port: 1883},
+         subscriptions: [{"j1605/states/set/+", 0}],
+         handler: {J1605Mqtt.Setter, []}
+       ]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

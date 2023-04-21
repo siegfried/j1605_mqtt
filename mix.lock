@@ -1,0 +1,6 @@
+%{
+  "gen_state_machine": {:hex, :gen_state_machine, "3.0.0", "1e57f86a494e5c6b14137ebef26a7eb342b3b0070c7135f2d6768ed3f6b6cdff", [:mix], [], "hexpm", "0a59652574bebceb7309f6b749d2a41b45fdeda8dbb4da0791e355dd19f0ed15"},
+  "j1605": {:hex, :j1605, "0.3.0", "6cc23b09b4710062f6e9a71753fba0fd174663065d92f0cd1520bc4c88a01b94", [:mix], [], "hexpm", "a8cf0a7f4e13d5355bcb2ef626c33a13e042befc7561d0b66ee533bc3e3f85ff"},
+  "mqtt": {:hex, :mqtt, "0.3.3", "eb6cc74be3146de9a9e9d59a2ffac788ebc9bcb1b89c8741977bbd555da8b815", [:mix, :rebar3], [], "hexpm", "0c794a71a59e45f3e29580db42fd89edba9c75f8f090c4cdcd926ae2923f2997"},
+  "tortoise": {:hex, :tortoise, "0.10.0", "d8821b9a5052355ca61d9fa784652f435997fa98b210f88565c98f3494605efd", [:mix], [{:gen_state_machine, "~> 2.0 or ~> 3.0", [hex: :gen_state_machine, repo: "hexpm", optional: false]}], "hexpm", "926d97b03cd0d2f6e0e1ebf06c1efa50101de96d0317dea5604c1c9e43e66735"},
+}
