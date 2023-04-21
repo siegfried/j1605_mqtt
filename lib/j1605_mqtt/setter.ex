@@ -17,7 +17,7 @@ defmodule J1605Mqtt.Setter do
 
   # topic filter j1605/states/set/+
   def handle_message(["j1605", "states", "set", relay], payload, state) do
-    id = String.to_integer(relay)
+    id = String.to_integer(relay) - 1
 
     if payload == "0" do
       J1605.turn_off(id)
