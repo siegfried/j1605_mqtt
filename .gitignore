@@ -24,3 +24,6 @@ j1605_mqtt-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+/config/dev.exs
+/config/prod.exs
