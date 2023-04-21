@@ -25,7 +25,7 @@ defmodule J1605Mqtt.Setter do
       J1605.turn_on(id)
     end
 
-    Process.sleep(1000)
+    Process.sleep(500)
 
     {:ok, state}
   end
