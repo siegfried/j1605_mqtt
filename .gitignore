@@ -27,3 +27,4 @@ j1605_mqtt-*.tar
 
 /config/dev.exs
 /config/prod.exs
+result
