@@ -79,7 +79,7 @@
           ...
         }:
         let
-          j1605_mqtt = self.outputs.packages.${pkgs.system}.default;
+          j1605_mqtt = self.outputs.packages.${pkgs.stdenv.hostPlatform.system}.default;
           cfg = config.services.j1605-mqtt;
         in
         {
