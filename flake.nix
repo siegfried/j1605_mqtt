@@ -53,10 +53,11 @@
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
             helix
+            elixir-ls
           ];
           buildInputs = [
             elixir
-            pkgs.elixir-ls
+            pkgs.erlang_27
           ]
           ++ pkgs.lib.optional pkgs.stdenv.isLinux pkgs.inotify-tools
           ++ pkgs.lib.optionals pkgs.stdenv.isDarwin (
