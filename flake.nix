@@ -50,6 +50,42 @@
       {
         packages.default = j1605_mqtt;
 
+        nixosModules.default =
+          {
+            config,
+            lib,
+            pkgs,
+            ...
+          }:
+          let
+            cfg = config.services.j1605-mqtt;
+          in
+          {
+            options.services.j1605-mqtt = {
+              enable = lib.mkEnableOption "j1605-mqtt";
+              host = lib.mkOption {
+                type = lib.types.str;
+                default = "localhost";
+                description = "MQTT broker host";
+              };
+            };
+
+            config = lib.mkIf cfg.enable {
+              systemd.services.j1605-mqtt = {
+                description = "j1605_mqtt MQTT client";
+                wantedBy = [ "multi-user.target" ];
+                environment = {
+                  J1605_MQTT_HOST = cfg.host;
+                };
+                serviceConfig = {
+                  Restart = "always";
+                  RestartSec = "5";
+                  ExecStart = "${j1605_mqtt}/bin/j1605_mqtt start";
+                };
+              };
+            };
+          };
+
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
             helix
@@ -59,14 +95,7 @@
             elixir
             pkgs.erlang_27
           ]
-          ++ pkgs.lib.optional pkgs.stdenv.isLinux pkgs.inotify-tools
-          ++ pkgs.lib.optionals pkgs.stdenv.isDarwin (
-            with pkgs.darwin.apple_sdk.frameworks;
-            [
-              CoreFoundation
-              CoreServices
-            ]
-          );
+          ++ pkgs.lib.optional pkgs.stdenv.isLinux pkgs.inotify-tools;
 
           shellHook = ''
             # Set up local hex and rebar paths
