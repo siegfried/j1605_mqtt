@@ -51,6 +51,9 @@
         packages.default = j1605_mqtt;
 
         devShells.default = pkgs.mkShell {
+          nativeBuildInputs = with pkgs; [
+            helix
+          ];
           buildInputs = [
             elixir
             pkgs.elixir-ls
