@@ -90,11 +90,23 @@
               default = "localhost";
               description = "MQTT broker host";
             };
+            after = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              default = [ ];
+              description = "List of systemd services to start after";
+            };
+            wants = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              default = [ ];
+              description = "List of systemd services to want";
+            };
           };
 
           config = lib.mkIf cfg.enable {
             systemd.services.j1605-mqtt = {
               description = "j1605_mqtt MQTT client";
+              after = cfg.after;
+              wants = cfg.wants;
               wantedBy = [ "multi-user.target" ];
               environment = {
                 J1605_MQTT_HOST = cfg.host;
