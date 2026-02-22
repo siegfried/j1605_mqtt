@@ -1,15 +1,20 @@
 defmodule J1605Mqtt.Getter do
   use GenServer
 
+  require Logger
+
   def start_link(client_id) do
     GenServer.start_link(__MODULE__, client_id)
   end
 
   def init(client_id) do
     with {:ok, _} <- J1605.subscribe() do
+      Logger.info("Subscribed to J1605 device")
       {:ok, client_id}
     else
-      error -> {:stop, error}
+      error -> 
+        Logger.error("Failed to subscribe to J1605 device: #{inspect(error)}")
+        {:stop, error}
     end
   end
 

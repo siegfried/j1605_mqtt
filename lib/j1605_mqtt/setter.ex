@@ -7,17 +7,16 @@ defmodule J1605Mqtt.Setter do
     {:ok, args}
   end
 
-  def connection(_status, state) do
-    # `status` will be either `:up` or `:down`; you can use this to
-    # inform the rest of your system if the connection is currently
-    # open or closed; tortoise should be busy reconnecting if you get
-    # a `:down`
+  def connection(status, state) do
+    Logger.info("MQTT connection status: #{status}")
     {:ok, state}
   end
 
   # topic filter j1605/states/set/+
   def handle_message(["j1605", "states", "set", relay], payload, state) do
     id = String.to_integer(relay) - 1
+
+    Logger.info("Received command: relay=#{relay}, id=#{id}, payload=#{payload}")
 
     if payload == "0" do
       J1605.turn_off(id)

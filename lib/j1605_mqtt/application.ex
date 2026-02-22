@@ -7,6 +7,9 @@ defmodule J1605Mqtt.Application do
 
   @impl true
   def start(_type, _args) do
+    host = Application.get_env(:j1605_mqtt, :host)
+    Logger.info("Starting j1605_mqtt, MQTT host: #{host}")
+
     children = [
       # Starts a worker by calling: J1605Mqtt.Worker.start_link(arg)
       {J1605Mqtt.Getter, __MODULE__},
